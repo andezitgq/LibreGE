@@ -9,7 +9,7 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <string>
-#include <json/value.h>
+#include <jsoncpp/json/value.h>
 
 #include "mainwindow.h"
 using namespace std;

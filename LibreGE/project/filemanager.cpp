@@ -24,12 +24,19 @@ void FileManager::setFmanJSON(Json::Value root,
                           const string fileType,
                           QListWidget *fman)
 {
-    root[entry->d_name]["type"] = fileType;
-    root[entry->d_name]["icon"] = iconPath;
-    QString entryIcon = QString::fromStdString(iconPath);
-    QString entryName = QString::fromStdString(entry->d_name);
-    QIcon *icon = new QIcon(entryIcon);
-    QListWidgetItem *item = new QListWidgetItem(*icon, entryName, fman);
+    if(strcmp(entry->d_name, ".") != 0 &&
+       strcmp(entry->d_name, "..") != 0 &&
+       strcmp(entry->d_name, ".directory") != 0 &&
+       strcmp(entry->d_name, "Project.json") != 0 &&
+       strcmp(entry->d_name, "FileManager.json") != 0)
+    {
+        root[entry->d_name]["type"] = fileType;
+        root[entry->d_name]["icon"] = iconPath;
+        QString entryIcon = QString::fromStdString(iconPath);
+        QString entryName = QString::fromStdString(entry->d_name);
+        QIcon *icon = new QIcon(entryIcon);
+        QListWidgetItem *item = new QListWidgetItem(*icon, entryName, fman);
+    }
 }
 
 void FileManager::fman_setup(QListWidget *fman, const char *path){
@@ -73,6 +80,7 @@ void FileManager::fman_setup(QListWidget *fman, const char *path){
 
     if(temp != root.toStyledString()){
         ofstream outFile(strDir.c_str());
+        outFile << "";
         outFile << root.toStyledString();
         outFile.close();
     }

@@ -2,7 +2,7 @@
 #define PROJECTMANAGER_H
 
 #include <fstream>
-#include <json/value.h>
+#include <jsoncpp/json/value.h>
 #include <string>
 
 #include <QListWidget>
