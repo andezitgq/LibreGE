@@ -10,6 +10,7 @@
 #define LEN_NAME 24
 #define EVENT_SIZE  ( sizeof (struct inotify_event) )
 #define BUF_LEN     ( MAX_EVENTS * ( EVENT_SIZE + LEN_NAME ))
+
 FileManager::FileManager()
 {
 

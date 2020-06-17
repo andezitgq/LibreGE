@@ -26,7 +26,7 @@ public:
     ~FileManager();
     bool check_ext(string filename, string ext);
     void fman_setup(QListWidget *fman, string path);
-    void check_changes(const char *filePath);
+    static void check_changes(const char *filePath);
 
 private:
     void setFmanJSON(Json::Value root,
