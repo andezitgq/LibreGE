@@ -22,7 +22,7 @@ private:
 
     void setupEditor();
 
-    QTextEdit *codeEditor;
+    QTextEdit   *codeEditor;
     Highlighter *highlighter;
 };
 

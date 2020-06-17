@@ -1,5 +1,6 @@
 #include "filemanager.h"
 #include "mainwindow.h"
+#include "projectmanager.h"
 
 #include <fstream>
 #include <sstream>
@@ -37,7 +38,7 @@ void FileManager::check_changes(const char *filePath){
             printf("Watching:: %s\n",filePath);
         }
 
-        while(1)
+        while(ProjectManager::isChecking == true)
         {
             i = 0;
             length = read( fd, buffer, BUF_LEN );
@@ -110,16 +111,14 @@ void FileManager::setFmanJSON(Json::Value root,
 void FileManager::fman_setup(QListWidget *fman, string path){
     struct dirent *entry;
     string assetsPath = path + "/assets";
+    mkdir(assetsPath.c_str(), 0777);
     DIR *dir = opendir(assetsPath.c_str());
 
-    if (dir == NULL) {
-       mkdir(assetsPath.c_str(), 0777);
-    }
     Json::Value root;
     while ((entry = readdir(dir)) != NULL) {
         string strPath(path);
         string strFile(entry->d_name);
-        string strDir = strPath + "/" + strFile;
+        string strDir = strPath + "/assets/" + strFile;
         DIR *testDir = opendir(strDir.c_str());
         root[entry->d_name]["path"] = strDir;
         if(testDir != NULL){

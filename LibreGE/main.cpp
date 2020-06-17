@@ -19,12 +19,12 @@ int main(int argc, char *argv[])
     glutInit(&argc, argv);
     QApplication a(argc, argv);
     MainWindow w;
-
-    thread windowThr(windowInit, w);
+    w.show();
+    /*thread windowThr(windowInit, w);
     thread fileCheckThr(FileManager::check_changes, "123");
 
     windowThr.join();
-    fileCheckThr.join();
+    fileCheckThr.join();*/
 
     return a.exec();
 }

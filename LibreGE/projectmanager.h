@@ -14,13 +14,15 @@ class ProjectManager
 {
 
 public:
-    QListWidget *listWidget;
-    ProjectManager(QListWidget *listWidget);
+    ProjectManager();
     ~ProjectManager();
-    void NewProjectMenu(string projectDir);
-    void CreateProject(string projectName, string mainScene, string type);
-    void OpenProject();
-    string dir;
+    static void NewProjectMenu(string projectDir);
+    static void CreateProject(string projectName, string mainScene, string type);
+    static void OpenProject();
+
+    static string       dir;
+    static bool         isChecking;
+    static QListWidget *listWidget;
 };
 
 #endif // PROJECTMANAGER_H

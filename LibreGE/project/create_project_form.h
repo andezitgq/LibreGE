@@ -14,8 +14,7 @@ class CreateProjectForm : public QMainWindow
     Q_OBJECT
 
 public:
-    ProjectManager *pm;
-    explicit CreateProjectForm(ProjectManager *pm, QWidget *parent = nullptr);
+    explicit CreateProjectForm(QWidget *parent = nullptr);
     ~CreateProjectForm();
 
 private slots:

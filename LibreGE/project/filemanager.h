@@ -24,8 +24,8 @@ class FileManager
 public:
     FileManager();
     ~FileManager();
-    bool check_ext(string filename, string ext);
-    void fman_setup(QListWidget *fman, string path);
+    bool        check_ext(string filename, string ext);
+    void        fman_setup(QListWidget *fman, string path);
     static void check_changes(const char *filePath);
 
 private:

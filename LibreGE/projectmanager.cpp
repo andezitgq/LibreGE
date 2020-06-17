@@ -7,16 +7,19 @@
 #include <QDesktopWidget>
 using namespace std;
 
-ProjectManager::ProjectManager(QListWidget *listWidget)
+ProjectManager::ProjectManager()
 {
-    this->dir = "";
-    this->listWidget = listWidget;
+
 }
+
+string      ProjectManager::dir = "";
+bool        ProjectManager::isChecking = false;
+QListWidget *ProjectManager::listWidget = NULL;
 
 void ProjectManager::NewProjectMenu(string projectDir)
 {
-    this->dir = projectDir;
-    CreateProjectForm *cpf = new CreateProjectForm(this);
+    ProjectManager::dir = projectDir;
+    CreateProjectForm *cpf = new CreateProjectForm();
     cpf->setAttribute(Qt::WA_DeleteOnClose);
     QRect screenGeometry = QApplication::desktop()->screenGeometry();
     int x = (screenGeometry.width() - cpf->width()) / 2;
@@ -32,11 +35,11 @@ void ProjectManager::CreateProject(string projectName, string mainScene, string 
     root["Project"]["Scenes"][mainScene]["SceneName"] = mainScene;
     root["Project"]["Type"] = type;
 
-    ofstream out(this->dir + "/Project.json");
+    ofstream out(ProjectManager::dir + "/Project.json");
     out << root.toStyledString();
     out.close();
     FileManager *fm = new FileManager();
-    fm->fman_setup(this->listWidget, this->dir.c_str());
+        fm->fman_setup(ProjectManager::listWidget, ProjectManager::dir.c_str());
 }
 
 void ProjectManager::OpenProject(){

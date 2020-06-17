@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     MainWindow::showMaximized();
+    ProjectManager::listWidget = ui->file_manager;
 }
 
 MainWindow::~MainWindow()
@@ -52,8 +53,7 @@ void MainWindow::on_actionCreate_project_triggered()
     QString dir_str = QFileDialog::getExistingDirectory(this, tr("Select"),"/home",QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     if(dir_str != NULL){
         string dir = dir_str.toStdString();
-        ProjectManager *pm = new ProjectManager(ui->file_manager);
-        pm->NewProjectMenu(dir);
+        ProjectManager::NewProjectMenu(dir);
     } else {
         cout << "[Error] Folder isn't selected!" << endl;
     }

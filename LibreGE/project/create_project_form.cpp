@@ -9,12 +9,11 @@
 using namespace std;
 using std::string;
 
-CreateProjectForm::CreateProjectForm(ProjectManager *pm, QWidget *parent) :
+CreateProjectForm::CreateProjectForm(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CreateProjectForm)
 {
     ui->setupUi(this);
-    this->pm = pm;
 
     ui->comboType->addItem("First Person");
     ui->comboType->addItem("Third Person");
@@ -30,7 +29,7 @@ void CreateProjectForm::on_createButton_released()
 {
     if(ui->projectName->text() != NULL){
         if(ui->mainSceneName->text() != NULL){
-            this->pm->CreateProject(ui->projectName->text().toStdString(),
+            ProjectManager::CreateProject(ui->projectName->text().toStdString(),
                              ui->mainSceneName->text().toStdString(),
                              ui->comboType->currentText().toStdString());
 
