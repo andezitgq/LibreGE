@@ -12,8 +12,8 @@ ProjectManager::ProjectManager()
 
 }
 
-string      ProjectManager::dir = "";
-bool        ProjectManager::isChecking = false;
+string      ProjectManager::dir         = "";
+bool        ProjectManager::isChecking  = false;
 QListWidget *ProjectManager::listWidget = NULL;
 
 void ProjectManager::NewProjectMenu(string projectDir)
