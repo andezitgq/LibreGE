@@ -58,6 +58,7 @@ SOURCES       = ../LibreGE/editor/formeditor.cpp \
 		../LibreGE/main.cpp \
 		../LibreGE/mainwindow.cpp \
 		../LibreGE/project/create_project_form.cpp \
+		../LibreGE/project/debug.cpp \
 		../LibreGE/project/filemanager.cpp \
 		../LibreGE/projectmanager.cpp qrc_icons.cpp \
 		moc_formeditor.cpp \
@@ -71,6 +72,7 @@ OBJECTS       = formeditor.o \
 		main.o \
 		mainwindow.o \
 		create_project_form.o \
+		debug.o \
 		filemanager.o \
 		projectmanager.o \
 		qrc_icons.o \
@@ -295,6 +297,7 @@ DIST          = ../../5.14.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../LibreGE/glwidget.h \
 		../LibreGE/mainwindow.h \
 		../LibreGE/project/create_project_form.h \
+		../LibreGE/project/debug.h \
 		../LibreGE/project/filemanager.h \
 		../LibreGE/projectmanager.h ../LibreGE/editor/formeditor.cpp \
 		../LibreGE/editor/highlighter.cpp \
@@ -302,6 +305,7 @@ DIST          = ../../5.14.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../LibreGE/main.cpp \
 		../LibreGE/mainwindow.cpp \
 		../LibreGE/project/create_project_form.cpp \
+		../LibreGE/project/debug.cpp \
 		../LibreGE/project/filemanager.cpp \
 		../LibreGE/projectmanager.cpp
 QMAKE_TARGET  = LibreGE
@@ -758,8 +762,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../LibreGE/src/icons.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../5.14.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../LibreGE/editor/formeditor.h ../LibreGE/editor/highlighter.h ../LibreGE/glwidget.h ../LibreGE/mainwindow.h ../LibreGE/project/create_project_form.h ../LibreGE/project/filemanager.h ../LibreGE/projectmanager.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../LibreGE/editor/formeditor.cpp ../LibreGE/editor/highlighter.cpp ../LibreGE/glwidget.cpp ../LibreGE/main.cpp ../LibreGE/mainwindow.cpp ../LibreGE/project/create_project_form.cpp ../LibreGE/project/filemanager.cpp ../LibreGE/projectmanager.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../LibreGE/editor/formeditor.h ../LibreGE/editor/highlighter.h ../LibreGE/glwidget.h ../LibreGE/mainwindow.h ../LibreGE/project/create_project_form.h ../LibreGE/project/debug.h ../LibreGE/project/filemanager.h ../LibreGE/projectmanager.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../LibreGE/editor/formeditor.cpp ../LibreGE/editor/highlighter.cpp ../LibreGE/glwidget.cpp ../LibreGE/main.cpp ../LibreGE/mainwindow.cpp ../LibreGE/project/create_project_form.cpp ../LibreGE/project/debug.cpp ../LibreGE/project/filemanager.cpp ../LibreGE/projectmanager.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../LibreGE/editor/formeditor.ui ../LibreGE/mainwindow.ui ../LibreGE/project/create_project_form.ui $(DISTDIR)/
 	$(COPY_FILE) --parents LibreGE_en_US.ts $(DISTDIR)/
 
@@ -1984,9 +1988,8 @@ glwidget.o: ../LibreGE/glwidget.cpp ../LibreGE/glwidget.h \
 		../../5.14.2/gcc_64/include/QtCore/qbasictimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o glwidget.o ../LibreGE/glwidget.cpp
 
-main.o: ../LibreGE/main.cpp ../LibreGE/mainwindow.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QMainWindow \
-		../../5.14.2/gcc_64/include/QtWidgets/qmainwindow.h \
+main.o: ../LibreGE/main.cpp ../../5.14.2/gcc_64/include/QtWidgets/QApplication \
+		../../5.14.2/gcc_64/include/QtWidgets/qapplication.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
 		../../5.14.2/gcc_64/include/QtGui/qtguiglobal.h \
 		../../5.14.2/gcc_64/include/QtCore/qglobal.h \
@@ -2012,22 +2015,20 @@ main.o: ../LibreGE/main.cpp ../LibreGE/mainwindow.h \
 		../../5.14.2/gcc_64/include/QtCore/qversiontagging.h \
 		../../5.14.2/gcc_64/include/QtGui/qtgui-config.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qwidget.h \
-		../../5.14.2/gcc_64/include/QtGui/qwindowdefs.h \
-		../../5.14.2/gcc_64/include/QtCore/qobjectdefs.h \
-		../../5.14.2/gcc_64/include/QtCore/qnamespace.h \
-		../../5.14.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../5.14.2/gcc_64/include/QtGui/qwindowdefs_win.h \
-		../../5.14.2/gcc_64/include/QtCore/qobject.h \
+		../../5.14.2/gcc_64/include/QtCore/qcoreapplication.h \
 		../../5.14.2/gcc_64/include/QtCore/qstring.h \
 		../../5.14.2/gcc_64/include/QtCore/qchar.h \
 		../../5.14.2/gcc_64/include/QtCore/qbytearray.h \
 		../../5.14.2/gcc_64/include/QtCore/qrefcount.h \
+		../../5.14.2/gcc_64/include/QtCore/qnamespace.h \
 		../../5.14.2/gcc_64/include/QtCore/qarraydata.h \
 		../../5.14.2/gcc_64/include/QtCore/qstringliteral.h \
 		../../5.14.2/gcc_64/include/QtCore/qstringalgorithms.h \
 		../../5.14.2/gcc_64/include/QtCore/qstringview.h \
 		../../5.14.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../../5.14.2/gcc_64/include/QtCore/qobject.h \
+		../../5.14.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../5.14.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		../../5.14.2/gcc_64/include/QtCore/qlist.h \
 		../../5.14.2/gcc_64/include/QtCore/qalgorithms.h \
 		../../5.14.2/gcc_64/include/QtCore/qiterator.h \
@@ -2046,10 +2047,16 @@ main.o: ../LibreGE/main.cpp ../LibreGE/mainwindow.h \
 		../../5.14.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../5.14.2/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../5.14.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../5.14.2/gcc_64/include/QtCore/qeventloop.h \
+		../../5.14.2/gcc_64/include/QtGui/qwindowdefs.h \
+		../../5.14.2/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../5.14.2/gcc_64/include/QtCore/qsize.h \
 		../../5.14.2/gcc_64/include/QtCore/qmargins.h \
+		../../5.14.2/gcc_64/include/QtGui/qcursor.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qwidget.h \
 		../../5.14.2/gcc_64/include/QtGui/qpaintdevice.h \
 		../../5.14.2/gcc_64/include/QtCore/qrect.h \
-		../../5.14.2/gcc_64/include/QtCore/qsize.h \
 		../../5.14.2/gcc_64/include/QtGui/qpalette.h \
 		../../5.14.2/gcc_64/include/QtGui/qcolor.h \
 		../../5.14.2/gcc_64/include/QtGui/qrgb.h \
@@ -2074,7 +2081,6 @@ main.o: ../LibreGE/main.cpp ../LibreGE/mainwindow.h \
 		../../5.14.2/gcc_64/include/QtGui/qfontmetrics.h \
 		../../5.14.2/gcc_64/include/QtGui/qfontinfo.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qsizepolicy.h \
-		../../5.14.2/gcc_64/include/QtGui/qcursor.h \
 		../../5.14.2/gcc_64/include/QtGui/qkeysequence.h \
 		../../5.14.2/gcc_64/include/QtGui/qevent.h \
 		../../5.14.2/gcc_64/include/QtCore/qvariant.h \
@@ -2090,6 +2096,11 @@ main.o: ../LibreGE/main.cpp ../LibreGE/mainwindow.h \
 		../../5.14.2/gcc_64/include/QtCore/qfiledevice.h \
 		../../5.14.2/gcc_64/include/QtGui/qvector2d.h \
 		../../5.14.2/gcc_64/include/QtGui/qtouchdevice.h \
+		../../5.14.2/gcc_64/include/QtGui/qguiapplication.h \
+		../../5.14.2/gcc_64/include/QtGui/qinputmethod.h \
+		../LibreGE/mainwindow.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QMainWindow \
+		../../5.14.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../5.14.2/gcc_64/include/QtGui/qicon.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QListWidget \
@@ -2110,13 +2121,11 @@ main.o: ../LibreGE/main.cpp ../LibreGE/mainwindow.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qstyle.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qtabbar.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qrubberband.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QApplication \
-		../../5.14.2/gcc_64/include/QtWidgets/qapplication.h \
-		../../5.14.2/gcc_64/include/QtCore/qcoreapplication.h \
-		../../5.14.2/gcc_64/include/QtCore/qeventloop.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../5.14.2/gcc_64/include/QtGui/qguiapplication.h \
-		../../5.14.2/gcc_64/include/QtGui/qinputmethod.h
+		../LibreGE/project/filemanager.h \
+		../../5.14.2/gcc_64/include/QtCore/QObject \
+		../../5.14.2/gcc_64/include/QtWidgets/QWidget \
+		../LibreGE/project/debug.h \
+		../LibreGE/projectmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../LibreGE/main.cpp
 
 mainwindow.o: ../LibreGE/mainwindow.cpp ../../5.14.2/gcc_64/include/QtWidgets/QMessageBox \
@@ -2495,6 +2504,9 @@ create_project_form.o: ../LibreGE/project/create_project_form.cpp ../../5.14.2/g
 		../../5.14.2/gcc_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o create_project_form.o ../LibreGE/project/create_project_form.cpp
 
+debug.o: ../LibreGE/project/debug.cpp ../LibreGE/project/debug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug.o ../LibreGE/project/debug.cpp
+
 filemanager.o: ../LibreGE/project/filemanager.cpp ../LibreGE/project/filemanager.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../5.14.2/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -2623,7 +2635,8 @@ filemanager.o: ../LibreGE/project/filemanager.cpp ../LibreGE/project/filemanager
 		../../5.14.2/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qstyle.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qtabbar.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qrubberband.h
+		../../5.14.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../LibreGE/projectmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filemanager.o ../LibreGE/project/filemanager.cpp
 
 projectmanager.o: ../LibreGE/projectmanager.cpp ../LibreGE/projectmanager.h \

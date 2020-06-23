@@ -22,6 +22,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     project/create_project_form.cpp \
+    project/debug.cpp \
     project/filemanager.cpp \
     projectmanager.cpp
 
@@ -31,6 +32,7 @@ HEADERS += \
     glwidget.h \
     mainwindow.h \
     project/create_project_form.h \
+    project/debug.h \
     project/filemanager.h \
     projectmanager.h
 

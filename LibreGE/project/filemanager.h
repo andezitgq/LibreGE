@@ -6,9 +6,9 @@
 #include <QWidget>
 
 #include <iostream>
+#include <string>
 #include <dirent.h>
 #include <sys/types.h>
-#include <string>
 #include <jsoncpp/json/value.h>
 #include <stdio.h>
 #include <stdlib.h>
