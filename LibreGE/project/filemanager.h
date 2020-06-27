@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>
+#include <QFileSystemWatcher>
 
 #include <iostream>
 #include <string>
@@ -19,14 +20,14 @@
 #include "mainwindow.h"
 using namespace std;
 
-class FileManager
+class FileManager : public QObject
 {
+    Q_OBJECT
 public:
-    FileManager();
-    ~FileManager();
+    explicit    FileManager(QObject *parent = nullptr);
     bool        check_ext(string filename, string ext);
     void        fman_setup(QListWidget *fman, string path);
-    static void check_changes(const char *filePath);
+    bool        SetFSWatcher();
 
 private:
     void setFmanJSON(Json::Value root,
@@ -34,6 +35,9 @@ private:
                  const string iconPath,
                  const string fileType,
                  QListWidget *fman);
+
+private slots:
+    static void changed(const QString &flName);
 };
 
 #endif // FILEMANAGER_H

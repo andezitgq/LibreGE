@@ -18,7 +18,6 @@ public:
     static void Log(string msg);
     static void Error(string msg);
     static void Warn(string msg);
-    static void Inotify(string msg);
 };
 
 #endif // DEBUG_H

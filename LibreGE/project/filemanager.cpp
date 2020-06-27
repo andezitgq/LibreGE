@@ -12,9 +12,16 @@
 #define EVENT_SIZE  ( sizeof (struct inotify_event) )
 #define BUF_LEN     ( MAX_EVENTS * ( EVENT_SIZE + LEN_NAME ))
 
-FileManager::FileManager()
+FileManager::FileManager(QObject *parent) : QObject(parent)
 {
 
+}
+
+void FileManager::changed(const QString &flName) {
+    cout << "[FS] File '" << flName.toStdString() << "' changed\n";
+    FileManager *fm = new FileManager();
+    fm->fman_setup(ProjectManager::listWidget, ProjectManager::dir.c_str());
+    delete fm;
 }
 
 bool FileManager::check_ext(string filename, string ext) {
@@ -92,4 +99,8 @@ void FileManager::fman_setup(QListWidget *fman, string path){
 
     inFile.close();
     closedir(dir);
+}
+
+bool FileManager::SetFSWatcher(){
+    return connect(ProjectManager::fsWatcher, SIGNAL(directoryChanged(QString)), this, SLOT(changed(QString)));
 }

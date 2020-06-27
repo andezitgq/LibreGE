@@ -40,7 +40,6 @@ void CreateProjectForm::on_createButton_released()
             msgBox.setWindowTitle("Completed!");
             msgBox.setIcon(QMessageBox::Information);
             msgBox.exec();
-            ProjectManager::isChecking = true;
 
             this->close();
         } else {

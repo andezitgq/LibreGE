@@ -65,7 +65,8 @@ SOURCES       = ../LibreGE/editor/formeditor.cpp \
 		moc_highlighter.cpp \
 		moc_glwidget.cpp \
 		moc_mainwindow.cpp \
-		moc_create_project_form.cpp
+		moc_create_project_form.cpp \
+		moc_filemanager.cpp
 OBJECTS       = formeditor.o \
 		highlighter.o \
 		glwidget.o \
@@ -80,7 +81,8 @@ OBJECTS       = formeditor.o \
 		moc_highlighter.o \
 		moc_glwidget.o \
 		moc_mainwindow.o \
-		moc_create_project_form.o
+		moc_create_project_form.o \
+		moc_filemanager.o
 DIST          = ../../5.14.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../5.14.2/gcc_64/mkspecs/common/unix.conf \
 		../../5.14.2/gcc_64/mkspecs/common/linux.conf \
@@ -804,9 +806,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../5.14.2/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -Wextra -dM -E -o moc_predefs.h ../../5.14.2/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_formeditor.cpp moc_highlighter.cpp moc_glwidget.cpp moc_mainwindow.cpp moc_create_project_form.cpp
+compiler_moc_header_make_all: moc_formeditor.cpp moc_highlighter.cpp moc_glwidget.cpp moc_mainwindow.cpp moc_create_project_form.cpp moc_filemanager.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_formeditor.cpp moc_highlighter.cpp moc_glwidget.cpp moc_mainwindow.cpp moc_create_project_form.cpp
+	-$(DEL_FILE) moc_formeditor.cpp moc_highlighter.cpp moc_glwidget.cpp moc_mainwindow.cpp moc_create_project_form.cpp moc_filemanager.cpp
 moc_formeditor.cpp: ../LibreGE/editor/formeditor.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../5.14.2/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -1437,6 +1439,8 @@ moc_create_project_form.cpp: ../LibreGE/project/create_project_form.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qstyle.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qtabbar.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../../5.14.2/gcc_64/include/QtCore/QFileSystemWatcher \
+		../../5.14.2/gcc_64/include/QtCore/qfilesystemwatcher.h \
 		../LibreGE/project/filemanager.h \
 		../../5.14.2/gcc_64/include/QtCore/QObject \
 		../../5.14.2/gcc_64/include/QtWidgets/QWidget \
@@ -1444,6 +1448,139 @@ moc_create_project_form.cpp: ../LibreGE/project/create_project_form.h \
 		moc_predefs.h \
 		../../5.14.2/gcc_64/bin/moc
 	/home/freelogger/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/freelogger/Qt5.14.2/PROJECTS/build-LibreGE-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/freelogger/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/freelogger/Qt5.14.2/PROJECTS/LibreGE -I/home/freelogger/Qt5.14.2/5.14.2/gcc_64/include -I/home/freelogger/Qt5.14.2/5.14.2/gcc_64/include/QtOpenGL -I/home/freelogger/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/freelogger/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/freelogger/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../LibreGE/project/create_project_form.h -o moc_create_project_form.cpp
+
+moc_filemanager.cpp: ../LibreGE/project/filemanager.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QMainWindow \
+		../../5.14.2/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../5.14.2/gcc_64/include/QtGui/qtguiglobal.h \
+		../../5.14.2/gcc_64/include/QtCore/qglobal.h \
+		../../5.14.2/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../5.14.2/gcc_64/include/QtCore/qconfig.h \
+		../../5.14.2/gcc_64/include/QtCore/qtcore-config.h \
+		../../5.14.2/gcc_64/include/QtCore/qsystemdetection.h \
+		../../5.14.2/gcc_64/include/QtCore/qprocessordetection.h \
+		../../5.14.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../5.14.2/gcc_64/include/QtCore/qtypeinfo.h \
+		../../5.14.2/gcc_64/include/QtCore/qsysinfo.h \
+		../../5.14.2/gcc_64/include/QtCore/qlogging.h \
+		../../5.14.2/gcc_64/include/QtCore/qflags.h \
+		../../5.14.2/gcc_64/include/QtCore/qatomic.h \
+		../../5.14.2/gcc_64/include/QtCore/qbasicatomic.h \
+		../../5.14.2/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../5.14.2/gcc_64/include/QtCore/qgenericatomic.h \
+		../../5.14.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../5.14.2/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../5.14.2/gcc_64/include/QtCore/qglobalstatic.h \
+		../../5.14.2/gcc_64/include/QtCore/qmutex.h \
+		../../5.14.2/gcc_64/include/QtCore/qnumeric.h \
+		../../5.14.2/gcc_64/include/QtCore/qversiontagging.h \
+		../../5.14.2/gcc_64/include/QtGui/qtgui-config.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qwidget.h \
+		../../5.14.2/gcc_64/include/QtGui/qwindowdefs.h \
+		../../5.14.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../5.14.2/gcc_64/include/QtCore/qnamespace.h \
+		../../5.14.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../5.14.2/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../5.14.2/gcc_64/include/QtCore/qobject.h \
+		../../5.14.2/gcc_64/include/QtCore/qstring.h \
+		../../5.14.2/gcc_64/include/QtCore/qchar.h \
+		../../5.14.2/gcc_64/include/QtCore/qbytearray.h \
+		../../5.14.2/gcc_64/include/QtCore/qrefcount.h \
+		../../5.14.2/gcc_64/include/QtCore/qarraydata.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringliteral.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringview.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../../5.14.2/gcc_64/include/QtCore/qlist.h \
+		../../5.14.2/gcc_64/include/QtCore/qalgorithms.h \
+		../../5.14.2/gcc_64/include/QtCore/qiterator.h \
+		../../5.14.2/gcc_64/include/QtCore/qhashfunctions.h \
+		../../5.14.2/gcc_64/include/QtCore/qpair.h \
+		../../5.14.2/gcc_64/include/QtCore/qvector.h \
+		../../5.14.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../5.14.2/gcc_64/include/QtCore/qpoint.h \
+		../../5.14.2/gcc_64/include/QtCore/qbytearraylist.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringlist.h \
+		../../5.14.2/gcc_64/include/QtCore/qregexp.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringmatcher.h \
+		../../5.14.2/gcc_64/include/QtCore/qcoreevent.h \
+		../../5.14.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../5.14.2/gcc_64/include/QtCore/qmetatype.h \
+		../../5.14.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../5.14.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../5.14.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../5.14.2/gcc_64/include/QtCore/qmargins.h \
+		../../5.14.2/gcc_64/include/QtGui/qpaintdevice.h \
+		../../5.14.2/gcc_64/include/QtCore/qrect.h \
+		../../5.14.2/gcc_64/include/QtCore/qsize.h \
+		../../5.14.2/gcc_64/include/QtGui/qpalette.h \
+		../../5.14.2/gcc_64/include/QtGui/qcolor.h \
+		../../5.14.2/gcc_64/include/QtGui/qrgb.h \
+		../../5.14.2/gcc_64/include/QtGui/qrgba64.h \
+		../../5.14.2/gcc_64/include/QtGui/qbrush.h \
+		../../5.14.2/gcc_64/include/QtGui/qmatrix.h \
+		../../5.14.2/gcc_64/include/QtGui/qpolygon.h \
+		../../5.14.2/gcc_64/include/QtGui/qregion.h \
+		../../5.14.2/gcc_64/include/QtCore/qdatastream.h \
+		../../5.14.2/gcc_64/include/QtCore/qiodevice.h \
+		../../5.14.2/gcc_64/include/QtCore/qline.h \
+		../../5.14.2/gcc_64/include/QtGui/qtransform.h \
+		../../5.14.2/gcc_64/include/QtGui/qpainterpath.h \
+		../../5.14.2/gcc_64/include/QtGui/qimage.h \
+		../../5.14.2/gcc_64/include/QtGui/qpixelformat.h \
+		../../5.14.2/gcc_64/include/QtGui/qpixmap.h \
+		../../5.14.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../5.14.2/gcc_64/include/QtCore/qshareddata.h \
+		../../5.14.2/gcc_64/include/QtCore/qhash.h \
+		../../5.14.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../5.14.2/gcc_64/include/QtGui/qfont.h \
+		../../5.14.2/gcc_64/include/QtGui/qfontmetrics.h \
+		../../5.14.2/gcc_64/include/QtGui/qfontinfo.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../5.14.2/gcc_64/include/QtGui/qcursor.h \
+		../../5.14.2/gcc_64/include/QtGui/qkeysequence.h \
+		../../5.14.2/gcc_64/include/QtGui/qevent.h \
+		../../5.14.2/gcc_64/include/QtCore/qvariant.h \
+		../../5.14.2/gcc_64/include/QtCore/qmap.h \
+		../../5.14.2/gcc_64/include/QtCore/qdebug.h \
+		../../5.14.2/gcc_64/include/QtCore/qtextstream.h \
+		../../5.14.2/gcc_64/include/QtCore/qlocale.h \
+		../../5.14.2/gcc_64/include/QtCore/qset.h \
+		../../5.14.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../5.14.2/gcc_64/include/QtCore/qurl.h \
+		../../5.14.2/gcc_64/include/QtCore/qurlquery.h \
+		../../5.14.2/gcc_64/include/QtCore/qfile.h \
+		../../5.14.2/gcc_64/include/QtCore/qfiledevice.h \
+		../../5.14.2/gcc_64/include/QtGui/qvector2d.h \
+		../../5.14.2/gcc_64/include/QtGui/qtouchdevice.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../5.14.2/gcc_64/include/QtGui/qicon.h \
+		../../5.14.2/gcc_64/include/QtCore/QObject \
+		../../5.14.2/gcc_64/include/QtWidgets/QWidget \
+		../LibreGE/mainwindow.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QListWidget \
+		../../5.14.2/gcc_64/include/QtWidgets/qlistwidget.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qlistview.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qframe.h \
+		../../5.14.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../5.14.2/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../5.14.2/gcc_64/include/QtGui/qvalidator.h \
+		../../5.14.2/gcc_64/include/QtCore/qregularexpression.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qslider.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qstyle.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qrubberband.h \
+		moc_predefs.h \
+		../../5.14.2/gcc_64/bin/moc
+	/home/freelogger/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/freelogger/Qt5.14.2/PROJECTS/build-LibreGE-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/freelogger/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/freelogger/Qt5.14.2/PROJECTS/LibreGE -I/home/freelogger/Qt5.14.2/5.14.2/gcc_64/include -I/home/freelogger/Qt5.14.2/5.14.2/gcc_64/include/QtOpenGL -I/home/freelogger/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/freelogger/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/freelogger/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../LibreGE/project/filemanager.h -o moc_filemanager.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -2123,9 +2260,7 @@ main.o: ../LibreGE/main.cpp ../../5.14.2/gcc_64/include/QtWidgets/QApplication \
 		../../5.14.2/gcc_64/include/QtWidgets/qrubberband.h \
 		../LibreGE/project/filemanager.h \
 		../../5.14.2/gcc_64/include/QtCore/QObject \
-		../../5.14.2/gcc_64/include/QtWidgets/QWidget \
-		../LibreGE/project/debug.h \
-		../LibreGE/projectmanager.h
+		../../5.14.2/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../LibreGE/main.cpp
 
 mainwindow.o: ../LibreGE/mainwindow.cpp ../../5.14.2/gcc_64/include/QtWidgets/QMessageBox \
@@ -2259,6 +2394,8 @@ mainwindow.o: ../LibreGE/mainwindow.cpp ../../5.14.2/gcc_64/include/QtWidgets/QM
 		../../5.14.2/gcc_64/include/QtWidgets/qtabbar.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../../5.14.2/gcc_64/include/QtCore/QFileSystemWatcher \
+		../../5.14.2/gcc_64/include/QtCore/qfilesystemwatcher.h \
 		../LibreGE/project/filemanager.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../5.14.2/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -2334,7 +2471,8 @@ mainwindow.o: ../LibreGE/mainwindow.cpp ../../5.14.2/gcc_64/include/QtWidgets/QM
 		../../5.14.2/gcc_64/include/QtGui/qglyphrun.h \
 		../../5.14.2/gcc_64/include/QtGui/qrawfont.h \
 		../../5.14.2/gcc_64/include/QtGui/qfontdatabase.h \
-		ui_formeditor.h
+		ui_formeditor.h \
+		../LibreGE/project/debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../LibreGE/mainwindow.cpp
 
 create_project_form.o: ../LibreGE/project/create_project_form.cpp ../../5.14.2/gcc_64/include/QtWidgets/QMessageBox \
@@ -2464,6 +2602,8 @@ create_project_form.o: ../LibreGE/project/create_project_form.cpp ../../5.14.2/g
 		../../5.14.2/gcc_64/include/QtWidgets/qtabbar.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../../5.14.2/gcc_64/include/QtCore/QFileSystemWatcher \
+		../../5.14.2/gcc_64/include/QtCore/qfilesystemwatcher.h \
 		../LibreGE/project/filemanager.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../5.14.2/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -2636,7 +2776,9 @@ filemanager.o: ../LibreGE/project/filemanager.cpp ../LibreGE/project/filemanager
 		../../5.14.2/gcc_64/include/QtWidgets/qstyle.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qtabbar.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qrubberband.h \
-		../LibreGE/projectmanager.h
+		../LibreGE/projectmanager.h \
+		../../5.14.2/gcc_64/include/QtCore/QFileSystemWatcher \
+		../../5.14.2/gcc_64/include/QtCore/qfilesystemwatcher.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filemanager.o ../LibreGE/project/filemanager.cpp
 
 projectmanager.o: ../LibreGE/projectmanager.cpp ../LibreGE/projectmanager.h \
@@ -2763,12 +2905,15 @@ projectmanager.o: ../LibreGE/projectmanager.cpp ../LibreGE/projectmanager.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qtabbar.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../../5.14.2/gcc_64/include/QtCore/QFileSystemWatcher \
+		../../5.14.2/gcc_64/include/QtCore/qfilesystemwatcher.h \
 		../LibreGE/project/filemanager.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../5.14.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../5.14.2/gcc_64/include/QtCore/QObject \
 		../../5.14.2/gcc_64/include/QtWidgets/QWidget \
 		../LibreGE/mainwindow.h \
+		../LibreGE/project/debug.h \
 		../LibreGE/project/create_project_form.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QFileDialog \
 		../../5.14.2/gcc_64/include/QtWidgets/qfiledialog.h \
@@ -2782,7 +2927,10 @@ projectmanager.o: ../LibreGE/projectmanager.cpp ../LibreGE/projectmanager.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../../5.14.2/gcc_64/include/QtGui/qguiapplication.h \
 		../../5.14.2/gcc_64/include/QtGui/qinputmethod.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QDesktopWidget
+		../../5.14.2/gcc_64/include/QtWidgets/QDesktopWidget \
+		../../5.14.2/gcc_64/include/QtCore/QTimer \
+		../../5.14.2/gcc_64/include/QtCore/qtimer.h \
+		../../5.14.2/gcc_64/include/QtCore/qbasictimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o projectmanager.o ../LibreGE/projectmanager.cpp
 
 qrc_icons.o: qrc_icons.cpp 
@@ -2802,6 +2950,9 @@ moc_mainwindow.o: moc_mainwindow.cpp
 
 moc_create_project_form.o: moc_create_project_form.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_create_project_form.o moc_create_project_form.cpp
+
+moc_filemanager.o: moc_filemanager.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_filemanager.o moc_filemanager.cpp
 
 ####### Install
 

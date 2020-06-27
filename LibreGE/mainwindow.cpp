@@ -12,6 +12,7 @@
 #include "ui_formeditor.h"
 
 #include "project/filemanager.h"
+#include "project/debug.h"
 
 using namespace std;
 
@@ -29,10 +30,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//:==============:FORM:TRIGGERS:===========:
-
-//:===:BUTTONS:===:
-
 void MainWindow::on_openEditor_clicked()
 {
     FormEditor *h = new FormEditor;
@@ -40,8 +37,6 @@ void MainWindow::on_openEditor_clicked()
     h->show();
 }
 
-
-//:====:MENU:====:
 
 void MainWindow::on_actionNew_triggered()
 {
@@ -55,6 +50,6 @@ void MainWindow::on_actionCreate_project_triggered()
         string dir = dir_str.toStdString();
         ProjectManager::NewProjectMenu(dir);
     } else {
-        cout << "[Error] Folder isn't selected!" << endl;
+        Debug::Error("Folder isn't selected!");
     }
 }

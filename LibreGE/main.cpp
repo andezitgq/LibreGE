@@ -6,8 +6,6 @@
 
 using namespace std;
 
-void check_changes(const char *filePath);
-
 int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);

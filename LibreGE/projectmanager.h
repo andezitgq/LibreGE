@@ -6,8 +6,10 @@
 #include <string>
 
 #include <QListWidget>
+#include <QFileSystemWatcher>
 
 #include "project/filemanager.h"
+
 using std::string;
 
 class ProjectManager
@@ -20,9 +22,9 @@ public:
     static void CreateProject(string projectName, string mainScene, string type);
     static void OpenProject();
 
-    static string       dir;
-    static bool         isChecking;
-    static QListWidget *listWidget;
+    static string               dir;
+    static QListWidget         *listWidget;
+    static QFileSystemWatcher  *fsWatcher;
 };
 
 #endif // PROJECTMANAGER_H
